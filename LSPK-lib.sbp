@@ -22,13 +22,13 @@ End Type
 
 Typedef LSPK_FINDHANDLE = *LSPK_FINDDATA
 
-'FALSE‚ğ•Ô‚·‚ÆI—¹
+'FALSEã‚’è¿”ã™ã¨çµ‚äº†
 Typedef LSPK_CALLBACK = *Function(hFind As LSPK_FINDHANDLE,info As VoidPtr,path As *FilePath,userdata As VoidPtr,lv As Long) As BOOL
 
-/* LSPK_CALLBACK‚É‚Â‚¢‚Ä
- *  ƒfƒBƒŒƒNƒgƒŠ‘{¸‚ÍA‘{¸ŠÖ”‚ÉƒR[ƒ‹ƒoƒbƒNŠÖ”‚ğ“n‚·B
- *  ƒfƒBƒŒƒNƒgƒŠ‚Ü‚½‚Íƒtƒ@ƒCƒ‹‚ªŒ©‚Â‚©‚é‚Æ‚±[[‚éƒoƒbƒN‚ªŒÄ‚Î‚ê‚éB
- *@ƒR[ƒ‹ƒoƒbƒNŠÖ”‚ÍAŒÄ‚Î‚ê‚½‚çƒfƒBƒŒƒNƒgƒŠ‚©ƒtƒ@ƒCƒ‹‚©‚ğ”»’f‚µA•\¦‚âƒtƒ@ƒCƒ‹‚Ì•Û‘¶‚È‚Ç‚ğs‚¤B
+/* LSPK_CALLBACKã«ã¤ã„ã¦
+ *  ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªæœæŸ»ã¯ã€æœæŸ»é–¢æ•°ã«ã‚³ãƒ¼ãƒ«ãƒãƒƒã‚¯é–¢æ•°ã‚’æ¸¡ã™ã€‚
+ *  ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã¾ãŸã¯ãƒ•ã‚¡ã‚¤ãƒ«ãŒè¦‹ã¤ã‹ã‚‹ã¨ã“ãƒ¼ãƒ¼ã‚‹ãƒãƒƒã‚¯ãŒå‘¼ã°ã‚Œã‚‹ã€‚
+ *ã€€ã‚³ãƒ¼ãƒ«ãƒãƒƒã‚¯é–¢æ•°ã¯ã€å‘¼ã°ã‚ŒãŸã‚‰ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã‹ãƒ•ã‚¡ã‚¤ãƒ«ã‹ã‚’åˆ¤æ–­ã—ã€è¡¨ç¤ºã‚„ãƒ•ã‚¡ã‚¤ãƒ«ã®ä¿å­˜ãªã©ã‚’è¡Œã†ã€‚
  */
 Enum LSPK_ARCHIVE_ERROR
 	LSPK_OK  = 0
@@ -68,7 +68,7 @@ Public
 	pfs As PFS_READER
 	pk As File
 
-	' ˆ³kƒ^ƒCƒv‚ğè“®İ’è‚·‚éê‡‚ÍopenArchive‚Ì‚ ‚Æ‚Å‚â‚Á‚Ä‚­‚¾‚³‚¢
+	' åœ§ç¸®ã‚¿ã‚¤ãƒ—ã‚’æ‰‹å‹•è¨­å®šã™ã‚‹å ´åˆã¯openArchiveã®ã‚ã¨ã§ã‚„ã£ã¦ãã ã•ã„
 	compressType As LSPK_COMPRESS_TYPE
 
 Private
@@ -77,7 +77,7 @@ Private
 	lastErrorGLE AS DWord
 
 Public
-	'pkƒA[ƒJƒCƒu‚ğŠJ‚­iŠg’£q–³‹j
+	'pkã‚¢ãƒ¼ã‚«ã‚¤ãƒ–ã‚’é–‹ãï¼ˆæ‹¡å¼µå­ç„¡è¦–ï¼‰
 	Function openArchive(pkPathStr As BytePtr)(bNoPKH As BOOL,bNoPFS As BOOL,bNoPK As BOOL) As BOOL
 		'default return ERROR
 		openArchive = FALSE
@@ -110,7 +110,7 @@ debug
 				ExitFunction
 			Endif			
 
-			'pk ‚Ìˆ³kƒ^ƒCƒv‚ğŒŸo
+			'pk ã®åœ§ç¸®ã‚¿ã‚¤ãƒ—ã‚’æ¤œå‡º
 			compressType = autoDetectcmpType()
 		Endif
 
@@ -121,7 +121,7 @@ debug
 		openArchive=TRUE
 	End Function
 
-	'“à•”ƒtƒ@ƒCƒ‹ƒpƒX‚ğŠî‚Éƒtƒ@ƒCƒ‹ƒAƒNƒZƒX(filename‚ÍNULL‰Â)
+	'å†…éƒ¨ãƒ•ã‚¡ã‚¤ãƒ«ãƒ‘ã‚¹ã‚’åŸºã«ãƒ•ã‚¡ã‚¤ãƒ«ã‚¢ã‚¯ã‚»ã‚¹(filenameã¯NULLå¯)
 	Function getFileInfo(path As BytePtr,filename As BytePtr) As *LSPK_FILEINFO
 		Dim ret As *LSPK_FILEINFO, fullpath As *FilePath
 		ret=new_LSPK_FILEINFO()
@@ -142,8 +142,8 @@ debug
 		getFileInfo=ret
 	End Function
 
-	'fileInfo‚©‚çƒtƒ@ƒCƒ‹‚ÌÀƒoƒCƒiƒŠ‚ğæ“¾
-	'g‚¢I‚í‚Á‚½‚çfree_buffer‚Å‰ğ•ú
+	'fileInfoã‹ã‚‰ãƒ•ã‚¡ã‚¤ãƒ«ã®å®Ÿãƒã‚¤ãƒŠãƒªã‚’å–å¾—
+	'ä½¿ã„çµ‚ã‚ã£ãŸã‚‰free_bufferã§è§£æ”¾
 	Function getFileBuffer(fileinfo As *LSPK_FILEINFO) As BytePtr
 		getFileBuffer=calloc(fileinfo->pkh->com_size)
 		If readPK(fileinfo->pkh->offsetLow,fileinfo->pkh->offsetHigh,getFileBuffer,fileinfo->pkh->com_size) = FALSE Then
@@ -152,7 +152,7 @@ debug
 		End If		
 	End Function
 
-	'ƒIƒtƒZƒbƒg‚©‚ç’¼‚ÉPKƒtƒ@ƒCƒ‹‚ğ“Ç‚Ş
+	'ã‚ªãƒ•ã‚»ãƒƒãƒˆã‹ã‚‰ç›´ã«PKãƒ•ã‚¡ã‚¤ãƒ«ã‚’èª­ã‚€
 	Function readPK(offsetLo As DWord, offsetHi AS DWord, buffer As BytePtr, length As Long) As BOOL
 		pk.setFilePtr(offsetLo, offsetHi)
 		If pk.read(buffer,length)>=0 Then 
@@ -164,8 +164,8 @@ debug
 		getCurrentDir=curDir.GetPath()
 	End Function*/
 
-	'w’èƒCƒ“ƒfƒbƒNƒX‚ÌƒfƒBƒŒƒNƒgƒŠî•ñæ“¾
-	'g‚¢I‚í‚ê‚Îfree_LSPK_DIRINFO‚Å‰ğ•ú
+	'æŒ‡å®šã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ã®ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªæƒ…å ±å–å¾—
+	'ä½¿ã„çµ‚ã‚ã‚Œã°free_LSPK_DIRINFOã§è§£æ”¾
 	Function getDirInfo(index As Long) As *LSPK_DIRINFO
 		Dim ret As *LSPK_DIRINFO
 		ret=new_LSPK_DIRINFO()
@@ -198,7 +198,7 @@ debug
 		Dim maybeZlib As BOOL
 		Dim i AS Long
 
-		' ˆ³kƒtƒH[ƒ}ƒbƒg‚ªŠm’è‚·‚é‚Ü‚Å6‚Â‚®‚ç‚¢ŒŸ¸
+		' åœ§ç¸®ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆãŒç¢ºå®šã™ã‚‹ã¾ã§6ã¤ãã‚‰ã„æ¤œæŸ»
 		For i=0 To 5
 			cmpType = checkCompressType(i)
 			if cmpType = LSPK_CTYPE_UNKNOWN Then
@@ -224,7 +224,7 @@ debug
 	'----------------------------------------
 	'
 Private
-	'w’èƒtƒHƒ‹ƒ_‚ÌÄ‹A’²¸‚ğŠJn
+	'æŒ‡å®šãƒ•ã‚©ãƒ«ãƒ€ã®å†å¸°èª¿æŸ»ã‚’é–‹å§‹
 	Function start_slove(dirId As Long,bFindDir As BOOL) As LSPK_FINDHANDLE
 		Dim ret As LSPK_FINDHANDLE,dirInfo As *LSPK_DIRINFO
 		ret=calloc(sizeof(LSPK_FINDDATA))
@@ -243,14 +243,14 @@ Private
 		start_slove=ret
 	EndFunction
 
-	'ƒtƒ@ƒCƒ‹–¼‚ğ•Ô‚· NULL•Ô‚µ‚ÅI—¹@‰ğ•ú•s—v
+	'ãƒ•ã‚¡ã‚¤ãƒ«åã‚’è¿”ã™ NULLè¿”ã—ã§çµ‚äº†ã€€è§£æ”¾ä¸è¦
 	Function next_sloveFile(hFind As LSPK_FINDHANDLE) As BytePtr
 		If hFind->current >= hFind->stop Then ExitFunction
 		next_sloveFile=pfs.GetFileStr(hFind->current)		
 		hFind->current++
 	End Function
 
-	'Ÿ‚ÌƒfƒBƒŒƒNƒgƒŠ
+	'æ¬¡ã®ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒª
 	Function next_sloveDir(hFind As LSPK_FINDHANDLE) As *LSPK_DIRINFO
 		If hFind->current >= hFind->stop Then ExitFunction
 		next_sloveDir=getDirInfo(hFind->current)
@@ -290,7 +290,7 @@ Private
 			Case &H11
 				ret = LSPK_CTYPE_LZ1X
 			Case Else
-				'‰ºˆÊ4ƒrƒbƒg‚ª08h‚¾‚Á‚½‚çZLIBˆ³k‚Ì‰Â”\«‚ª‚©‚·‚©‚É‚ ‚é
+				'ä¸‹ä½4ãƒ“ãƒƒãƒˆãŒ08hã ã£ãŸã‚‰ZLIBåœ§ç¸®ã®å¯èƒ½æ€§ãŒã‹ã™ã‹ã«ã‚ã‚‹
 				if (firstBytes[0] And &H0F) = &H08 Then
 					ret = LSPK_CTYPE_ZLIB_2
 				Else
@@ -328,7 +328,7 @@ Public
 
 	'----------------------------------------
 
-	'ƒfƒBƒŒƒNƒgƒŠID, ƒfƒBƒŒƒNƒgƒŠƒIƒ“ƒŠ[ƒtƒ‰ƒO,ƒpƒXiƒ†[ƒU[‘¤‚ÍNULLj,ƒR[ƒ‹ƒoƒbƒN,ƒ†[ƒU[ƒf[ƒ^,Ä‹AƒŒƒxƒ‹
+	'ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªID, ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã‚ªãƒ³ãƒªãƒ¼ãƒ•ãƒ©ã‚°,ãƒ‘ã‚¹ï¼ˆãƒ¦ãƒ¼ã‚¶ãƒ¼å´ã¯NULLï¼‰,ã‚³ãƒ¼ãƒ«ãƒãƒƒã‚¯,ãƒ¦ãƒ¼ã‚¶ãƒ¼ãƒ‡ãƒ¼ã‚¿,å†å¸°ãƒ¬ãƒ™ãƒ«
 	Sub slvDir(dirid As Long,bDirOnly As BOOL,path As *FilePath,callback As LSPK_CALLBACK,userdata As VoidPtr,lv As Long)
 		Dim bDelPath As BOOL
 		If path=NULL Then
@@ -343,12 +343,12 @@ Public
 
 		Dim cur As *LSPK_DIRINFO
 		Do
-			cur=next_sloveDir(hf())	'Ÿ‚Ìƒtƒ@ƒCƒ‹‚ğ‘–¸
-			If cur = NULL Then ExitDo		'ƒtƒ@ƒCƒ‹‚È‚µ
+			cur=next_sloveDir(hf())	'æ¬¡ã®ãƒ•ã‚¡ã‚¤ãƒ«ã‚’èµ°æŸ»
+			If cur = NULL Then ExitDo		'ãƒ•ã‚¡ã‚¤ãƒ«ãªã—
 
-			'ƒpƒX‚ÌŠK‘w‚ğ‘‚â‚µ‚Ä‰º‘w‚Ì‘–¸
+			'ãƒ‘ã‚¹ã®éšå±¤ã‚’å¢—ã‚„ã—ã¦ä¸‹å±¤ã®èµ°æŸ»
 			path->PushDir(cur->name)
-				'ƒR[ƒ‹ƒoƒbƒN‚ÉƒfƒBƒŒƒNƒgƒŠ‚ğ’Ê’m(ƒnƒ“ƒhƒ‹‚Å”»’fDir/File)
+				'ã‚³ãƒ¼ãƒ«ãƒãƒƒã‚¯ã«ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã‚’é€šçŸ¥(ãƒãƒ³ãƒ‰ãƒ«ã§åˆ¤æ–­Dir/File)
 				If callback(hf,cur,path,userdata,lv)=FALSE Then 		
 					free_LSPK_DIRINFO(cur)
 					ExitDo
@@ -402,7 +402,7 @@ Private
 		new_LSPK_DIRINFO=calloc(sizeof(LSPK_DIRINFO))
 	End Function
 
-	'Windows‚Ì'\'‚©‚çPK‚Ì'/'‚Ö’u‚«Š·‚¦A¬•¶š‰»
+	'Windowsã®'\'ã‹ã‚‰PKã®'/'ã¸ç½®ãæ›ãˆã€å°æ–‡å­—åŒ–
 	Function path2crc(str As BytePtr) As DWord
 		Dim lower As BytePtr , leng As Long , i As long
 		leng=lstrlen(str)
@@ -542,7 +542,7 @@ Type PKH_INFO_BLOCK_16
 	com_size As DWord
 EndType
 
-'’ŠÛ‰»‚³‚ê‚½IFNOBLOCK‚Ìƒf[ƒ^
+'æŠ½è±¡åŒ–ã•ã‚ŒãŸIFNOBLOCKã®ãƒ‡ãƒ¼ã‚¿
 Type PKH_INFO_BLOCK
 	hash As DWord
 	offsetLow As DWord
@@ -581,14 +581,24 @@ Public
 
 		'Load File Count
 		LoadFile(hFile,VarPtr(cFile),sizeof(DWord))
+
+		Dim headerLength As Integer
+		headerLength = 1
+		if cFile = 4737872 Then
+			LoadFile(hFile,VarPtr(cFile),sizeof(DWord))
+			headerLength = 2
+		Endif 
+
 		ChangeEndianDW(cFile)
 
+
+
 		Dim tableSize AS DWord
-		tableSize = GetFileSize(hFile,NULL) - sizeof(DWord) 
+		tableSize = GetFileSize(hFile,NULL) - sizeof(DWord) * headerLength
 
 	/*
 		If cFile*sizeof(PKH_INFO_BLOCK)+sizeof(DWord) <> GetFileSize(hFile,NULL) Then 
-			printf(ex"[Warning][PKH] ƒtƒ@ƒCƒ‹”‚ÆPKHƒTƒCƒY‚ªˆê’v‚µ‚Ü‚¹‚ñB\n")
+			printf(ex"[Warning][PKH] ãƒ•ã‚¡ã‚¤ãƒ«æ•°ã¨PKHã‚µã‚¤ã‚ºãŒä¸€è‡´ã—ã¾ã›ã‚“ã€‚\n")
 			'cFile = ( GetFileSize(hFile,NULL) - sizeof(DWord) ) / sizeof(PKH_INFO_BLOCK)
 			LoadPkhFile=FALSE:ExitFunction
 		Endif
@@ -615,14 +625,14 @@ Public
 		LoadPkhFile = LSPK_OK
 	EndFunction
 
-	' PKH‚Ìí—Ş‚ª2‚Â‚ ‚é‚Ì‚Å’†ŠÔŒ`®‚É•ÏŠ·
+	' PKHã®ç¨®é¡ãŒ2ã¤ã‚ã‚‹ã®ã§ä¸­é–“å½¢å¼ã«å¤‰æ›
 	Function BuildPkhTable(fileCount AS DWord, rawTable AS VoidPtr, tableSize AS DWord) As LSPK_ARCHIVE_ERROR
-		'Dim blockSize AS DWord  // ƒNƒ‰ƒX•Ï”‚É
+		'Dim blockSize AS DWord  // ã‚¯ãƒ©ã‚¹å¤‰æ•°ã«
 		blockSize = tableSize / fileCount
 
 		Dim i aS Long
 
-		' PKH16‚Ìê‡ 
+		' PKH16ã®å ´åˆ 
 		if blockSize = 16 Then
 			Dim pkh16 AS *PKH_INFO_BLOCK_16
 			pkh16=rawTable
@@ -699,7 +709,7 @@ Public
 	EndFunction
 
 	Function GetTableIndexFromHash(CRC32 As DWord) As Long
-		'“ñ•ª’Tõ
+		'äºŒåˆ†æ¢ç´¢
 		Dim pivot As DWord, top As DWord, bottom As DWord, i As DWord,dbg As DWord
 		top=0	:	bottom=cFile-1
 
@@ -707,16 +717,16 @@ Public
 			pivot = ( top + bottom ) / 2
 			If PKH_Table[pivot].hash=CRC32 Then
 '				If CRC32 = &H744172D3 As DWord then debug
-				'”­Œ©
+				'ç™ºè¦‹
 				GetTableIndexFromHash=pivot
 				ExitFunction
 				
 			ElseIf PKH_Table[pivot].hash < CRC32 Then
-				'ã”¼•ª‚ğ’Tõ
+				'ä¸ŠåŠåˆ†ã‚’æ¢ç´¢
 				top = pivot + 1
 
 			Else'If PKH_Table[pivot].hash > CRC32 Then
-				'‰º”¼•ª‚ğŒŸõ
+				'ä¸‹åŠåˆ†ã‚’æ¤œç´¢
 				bottom = pivot - 1				
 
 			Endif
@@ -737,7 +747,7 @@ End Class
 
 '----------------------------------------------------------------------
 
-'CRC32ƒm[ƒ}ƒ‹‚Ìƒe[ƒuƒ‹(CRC32b‚Æ‚Íˆá‚¤)B@main.dol‚Ì0x00737AD0‚ ‚½‚è‚É“¯‚¶‚­CRCƒe[ƒuƒ‹‚ª‚ ‚éB‚»‚ê‚ÆÆ‡‚µ‚½‚ªˆê’v‚µ‚Ä‚¢‚½B
+'CRC32ãƒãƒ¼ãƒãƒ«ã®ãƒ†ãƒ¼ãƒ–ãƒ«(CRC32bã¨ã¯é•ã†)ã€‚ã€€main.dolã®0x00737AD0ã‚ãŸã‚Šã«åŒã˜ãCRCãƒ†ãƒ¼ãƒ–ãƒ«ãŒã‚ã‚‹ã€‚ãã‚Œã¨ç…§åˆã—ãŸãŒä¸€è‡´ã—ã¦ã„ãŸã€‚
 '256 * 4bytes = 1024Byte
 Dim crc32tab[255] = [ 
 	&H00000000, &H04C11DB7, &H09823B6E, &H0D4326D9,
@@ -805,11 +815,65 @@ Dim crc32tab[255] = [
 	&HAFB010B1, &HAB710D06, &HA6322BDF, &HA2F33668,
 	&HBCB4666D, &HB8757BDA, &HB5365D03, &HB1F740B4, ] As DWord
 
+Dim crc32tab2[255] = [ 
+	0, &H1EDC6F41, &H3DB8DE82, &H2364B1C3, &H7B71BD04,
+	&H65ADD245, &H46C96386, &H58150CC7, &HF6E37A08, &HE83F1549,
+	&HCB5BA48A, &HD587CBCB, &H8D92C70C, &H934EA84D, &HB02A198E,
+	&HAEF676CF, &HF31A9B51, &HEDC6F410, &HCEA245D3, &HD07E2A92,
+	&H886B2655, &H96B74914, &HB5D3F8D7, &HAB0F9796, &H5F9E159,
+	&H1B258E18, &H38413FDB, &H269D509A, &H7E885C5D, &H6054331C,
+	&H433082DF, &H5DECED9E, &HF8E959E3, &HE63536A2, &HC5518761,
+	&HDB8DE820, &H8398E4E7, &H9D448BA6, &HBE203A65, &HA0FC5524,
+	&HE0A23EB, &H10D64CAA, &H33B2FD69, &H2D6E9228, &H757B9EEF,
+	&H6BA7F1AE, &H48C3406D, &H561F2F2C, &HBF3C2B2, &H152FADF3,
+	&H364B1C30, &H28977371, &H70827FB6, &H6E5E10F7, &H4D3AA134,
+	&H53E6CE75, &HFD10B8BA, &HE3CCD7FB, &HC0A86638, &HDE740979,
+	&H866105BE, &H98BD6AFF, &HBBD9DB3C, &HA505B47D, &HEF0EDC87,
+	&HF1D2B3C6, &HD2B60205, &HCC6A6D44, &H947F6183, &H8AA30EC2,
+	&HA9C7BF01, &HB71BD040, &H19EDA68F, &H731C9CE, &H2455780D,
+	&H3A89174C, &H629C1B8B, &H7C4074CA, &H5F24C509, &H41F8AA48,
+	&H1C1447D6, &H2C82897, &H21AC9954, &H3F70F615, &H6765FAD2,
+	&H79B99593, &H5ADD2450, &H44014B11, &HEAF73DDE, &HF42B529F,
+	&HD74FE35C, &HC9938C1D, &H918680DA, &H8F5AEF9B, &HAC3E5E58,
+	&HB2E23119, &H17E78564, &H93BEA25, &H2A5F5BE6, &H348334A7,
+	&H6C963860, &H724A5721, &H512EE6E2, &H4FF289A3, &HE104FF6C,
+	&HFFD8902D, &HDCBC21EE, &HC2604EAF, &H9A754268, &H84A92D29,
+	&HA7CD9CEA, &HB911F3AB, &HE4FD1E35, &HFA217174, &HD945C0B7,
+	&HC799AFF6, &H9F8CA331, &H8150CC70, &HA2347DB3, &HBCE812F2,
+	&H121E643D, &HCC20B7C, &H2FA6BABF, &H317AD5FE, &H696FD939,
+	&H77B3B678, &H54D707BB, &H4A0B68FA, &HC0C1D64F, &HDE1DB90E,
+	&HFD7908CD, &HE3A5678C, &HBBB06B4B, &HA56C040A, &H8608B5C9,
+	&H98D4DA88, &H3622AC47, &H28FEC306, &HB9A72C5, &H15461D84,
+	&H4D531143, &H538F7E02, &H70EBCFC1, &H6E37A080, &H33DB4D1E,
+	&H2D07225F, &HE63939C, &H10BFFCDD, &H48AAF01A, &H56769F5B,
+	&H75122E98, &H6BCE41D9, &HC5383716, &HDBE45857, &HF880E994,
+	&HE65C86D5, &HBE498A12, &HA095E553, &H83F15490, &H9D2D3BD1,
+	&H38288FAC, &H26F4E0ED, &H590512E, &H1B4C3E6F, &H435932A8,
+	&H5D855DE9, &H7EE1EC2A, &H603D836B, &HCECBF5A4, &HD0179AE5,
+	&HF3732B26, &HEDAF4467, &HB5BA48A0, &HAB6627E1, &H88029622,
+	&H96DEF963, &HCB3214FD, &HD5EE7BBC, &HF68ACA7F, &HE856A53E,
+	&HB043A9F9, &HAE9FC6B8, &H8DFB777B, &H9327183A, &H3DD16EF5,
+	&H230D01B4, &H69B077, &H1EB5DF36, &H46A0D3F1, &H587CBCB0,
+	&H7B180D73, &H65C46232, &H2FCF0AC8, &H31136589, &H1277D44A,
+	&HCABBB0B, &H54BEB7CC, &H4A62D88D, &H6906694E, &H77DA060F,
+	&HD92C70C0, &HC7F01F81, &HE494AE42, &HFA48C103, &HA25DCDC4,
+	&HBC81A285, &H9FE51346, &H81397C07, &HDCD59199, &HC209FED8,
+	&HE16D4F1B, &HFFB1205A, &HA7A42C9D, &HB97843DC, &H9A1CF21F,
+	&H84C09D5E, &H2A36EB91, &H34EA84D0, &H178E3513, &H9525A52,
+	&H51475695, &H4F9B39D4, &H6CFF8817, &H7223E756, &HD726532B,
+	&HC9FA3C6A, &HEA9E8DA9, &HF442E2E8, &HAC57EE2F, &HB28B816E,
+	&H91EF30AD, &H8F335FEC, &H21C52923, &H3F194662, &H1C7DF7A1,
+	&H2A198E0, &H5AB49427, &H4468FB66, &H670C4AA5, &H79D025E4,
+	&H243CC87A, &H3AE0A73B, &H198416F8, &H75879B9, &H5F4D757E,
+	&H41911A3F, &H62F5ABFC, &H7C29C4BD, &HD2DFB272, &HCC03DD33,
+	&HEF676CF0, &HF1BB03B1, &HA9AE0F76, &HB7726037, &H9416D1F4,
+	&H8ACABEB5, ] As DWord
+
 
 Function crc32(data As BytePtr,len As DWord) As DWord
 	crc32 = &HFFFFFFFF
 	While len
-		crc32 = (crc32 << 8) xor crc32tab[(crc32 >> 24) xor ((data[0]) and &HFF)]
+		crc32 = (crc32 << 8) xor crc32tab2[(crc32 >> 24) xor ((data[0]) and &HFF)]
 		len--
 		data++
 	Wend
